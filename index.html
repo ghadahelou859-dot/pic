@@ -14,561 +14,364 @@
 
 <style>
 
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+  margin:0;
+  padding:0;
+  scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-
-  background: #fffaf1;
-
-  font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
-
-  color: #9b7136;
+body{
+  margin:0;
+  padding:0;
+  background:#fffaf1;
+  font-family:Tahoma,Arial,sans-serif;
 }
 
 
-/* ==================================
-   إعداد الصفحات
-================================== */
+/* =========================================
+   الحاوية الرئيسية
+   كل الدعوة كأنها صورة/صفحة واحدة طويلة
+========================================= */
 
-.page {
-
-  position: relative;
-
-  width: 100%;
-
-  min-height: 100vh;
-
-  background: #fffaf1;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  overflow: hidden;
-
+#wedding{
+  width:100%;
+  max-width:600px;
+  margin:0 auto;
+  background:#fffaf1;
+  overflow:hidden;
 }
 
 
-/* ==================================
-   الصور
-================================== */
+/* =========================================
+   كل قسم
+========================================= */
 
-.full-image {
-
-  display: block;
-
-  width: 100%;
-
-  height: auto;
-
-  max-width: 600px;
-
-  margin: auto;
-
+.section{
+  position:relative;
+  width:100%;
+  margin:0;
+  padding:0;
+  line-height:0;
 }
 
 
-/* ==================================
-   صفحة فتح المغلف
-================================== */
+/* =========================================
+   كل الصور
+   بدون أي فراغ بينها
+========================================= */
 
-#intro {
-
-  min-height: 100vh;
-
-  background: #fffaf1;
-
+.section img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+  padding:0;
+  border:0;
 }
 
 
-.video-box {
+/* =========================================
+   صفحة البداية / الفيديو
+========================================= */
 
-  position: relative;
-
-  width: 100%;
-
-  max-width: 600px;
-
-  margin: auto;
-
+#intro{
+  position:relative;
+  width:100%;
+  margin:0;
+  padding:0;
+  background:#fffaf1;
+  line-height:0;
 }
 
 
-#introVideo {
-
-  display: block;
-
-  width: 100%;
-
-  height: auto;
-
-  max-height: 100vh;
-
-  object-fit: contain;
-
-  background: #fffaf1;
-
+#introVideo{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+  padding:0;
+  object-fit:cover;
 }
 
 
 /* زر شفاف فوق المغلف */
 
-#openButton {
+#openButton{
+  position:absolute;
+  inset:0;
 
-  position: absolute;
+  width:100%;
+  height:100%;
 
-  inset: 0;
+  padding:0;
+  margin:0;
 
-  width: 100%;
+  border:0;
+  background:transparent;
 
-  height: 100%;
+  cursor:pointer;
 
-  border: none;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  z-index: 5;
-
+  z-index:10;
 }
 
 
-/* عبارة فتح الدعوة */
+/* اضغطي لفتح الدعوة */
 
-#openText {
+#openText{
+  position:absolute;
 
-  position: absolute;
+  left:50%;
+  bottom:7%;
 
-  left: 50%;
+  transform:translateX(-50%);
 
-  bottom: 7%;
+  z-index:11;
 
-  transform: translateX(-50%);
+  line-height:1.2;
 
-  z-index: 6;
+  padding:10px 18px;
 
-  padding: 10px 20px;
+  border-radius:30px;
 
-  border-radius: 50px;
+  border:1px solid rgba(168,122,53,.45);
 
-  border:
-    1px solid
-    rgba(168, 122, 53, 0.45);
+  background:rgba(255,250,241,.9);
 
-  background:
-    rgba(255, 250, 241, 0.94);
+  color:#936a32;
 
-  color: #91672f;
+  font-size:14px;
 
-  font-size: 15px;
+  white-space:nowrap;
 
-  white-space: nowrap;
+  pointer-events:none;
 
-  pointer-events: none;
-
-  transition: opacity 0.4s ease;
-
+  transition:opacity .3s ease;
 }
 
 
-/* ==================================
+/* =========================================
    زر الموسيقى
-================================== */
+========================================= */
 
-#musicButton {
+#musicButton{
+  position:fixed;
 
-  position: fixed;
+  left:16px;
+  bottom:18px;
 
-  left: 18px;
+  z-index:9999;
 
-  bottom: 18px;
+  width:48px;
+  height:48px;
 
-  z-index: 9999;
+  border-radius:50%;
 
-  width: 50px;
+  border:1px solid rgba(168,122,53,.45);
 
-  height: 50px;
+  background:rgba(255,250,241,.95);
 
-  border-radius: 50%;
+  color:#a87a35;
 
-  border:
-    1px solid
-    rgba(168, 122, 53, 0.45);
+  cursor:pointer;
 
-  background:
-    rgba(255, 250, 241, 0.96);
+  font-size:19px;
 
-  color: #9b7136;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-  font-size: 19px;
-
-  cursor: pointer;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  box-shadow:
-    0 4px 15px
-    rgba(0,0,0,0.08);
-
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
 
-/* الموسيقى تعمل */
-
-#musicButton.playing {
-
-  background: #a87a35;
-
-  color: #fffaf1;
-
+#musicButton.playing{
+  background:#a87a35;
+  color:#fffaf1;
 }
 
 
-/* ==================================
-   سهم السحب
-================================== */
+/* =========================================
+   التايمر
+========================================= */
 
-.scroll-arrow {
+#timerSection{
+  position:relative;
 
-  position: absolute;
+  width:100%;
 
-  left: 50%;
+  margin:0;
+  padding:0;
 
-  bottom: 12px;
-
-  transform: translateX(-50%);
-
-  z-index: 20;
-
-  font-size: 28px;
-
-  color:
-    rgba(155,113,54,0.65);
-
-  pointer-events: none;
-
-  animation:
-    arrowMove
-    1.5s
-    infinite;
-
+  line-height:0;
 }
 
 
-@keyframes arrowMove {
+/* صورة التايمر */
 
-  0% {
+#timerImage{
+  display:block;
 
-    transform:
-      translate(-50%,0);
+  width:100%;
+  height:auto;
 
-  }
-
-  50% {
-
-    transform:
-      translate(-50%,8px);
-
-  }
-
-  100% {
-
-    transform:
-      translate(-50%,0);
-
-  }
-
+  margin:0;
+  padding:0;
 }
 
 
-/* ==================================
-   صفحة Save The Date
-================================== */
+/* =========================================
+   أرقام التايمر
+========================================= */
 
-#save {
+.timer-number{
+  position:absolute;
 
-  background: #fffaf1;
+  transform:translate(-50%,-50%);
 
-}
+  z-index:20;
 
+  line-height:1;
 
-/* ==================================
-   صفحة المعلومات
-================================== */
-
-#info {
-
-  background: #fffaf1;
-
-}
-
-
-/* ==================================
-   صفحة التايمر
-================================== */
-
-#timer {
-
-  position: relative;
-
-  width: 100%;
-
-  min-height: 100vh;
-
-  padding: 0;
-
-  background-color: #fffaf1;
-
-  background-image:
-    url("timer.png");
-
-  background-repeat:
-    no-repeat;
-
-  background-position:
-    center;
-
-  background-size:
-    contain;
-
-}
-
-
-/* طبقة الأرقام */
-
-.timer-page {
-
-  position: relative;
-
-  width: 100%;
-
-  height: 100vh;
-
-  max-width: 600px;
-
-  margin: auto;
-
-}
-
-
-/* أرقام التايمر */
-
-.timer-number {
-
-  position: absolute;
-
-  transform:
-    translate(-50%, -50%);
-
-  z-index: 20;
-
-  color: #a87a35;
+  color:#a87a35;
 
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  font-size:
-    clamp(
-      22px,
-      6vw,
-      38px
-    );
+  font-weight:500;
 
-  font-weight: 500;
+  font-size:clamp(20px,5.4vw,34px);
 
-  text-align: center;
+  text-align:center;
 
-  direction: ltr;
+  direction:ltr;
 
-  min-width: 50px;
-
+  min-width:45px;
 }
+
+
+/*
+   مهم:
+   هذه النسب محسوبة بالنسبة لصورة timer.png نفسها
+   وليس بالنسبة للشاشة.
+*/
 
 
 /* يوم */
 
-.days-number {
-
-  left: 78%;
-
-  top: 73%;
-
+#days{
+  left:78.3%;
+  top:73.2%;
 }
 
 
 /* ساعة */
 
-.hours-number {
-
-  left: 59%;
-
-  top: 73%;
-
+#hours{
+  left:59.1%;
+  top:73.2%;
 }
 
 
 /* دقيقة */
 
-.minutes-number {
-
-  left: 40%;
-
-  top: 73%;
-
+#minutes{
+  left:40%;
+  top:73.2%;
 }
 
 
 /* ثانية */
 
-.seconds-number {
-
-  left: 21%;
-
-  top: 73%;
-
+#seconds{
+  left:20.8%;
+  top:73.2%;
 }
 
 
-/* ==================================
-   صفحة الموقع
-================================== */
+/* =========================================
+   الموقع
+========================================= */
 
-#location {
+#locationSection{
+  position:relative;
 
-  min-height: 100vh;
+  width:100%;
 
-  background: #fffaf1;
+  margin:0;
+  padding:0;
 
-  flex-direction: column;
-
+  line-height:0;
 }
 
 
-.location-link {
-
-  display: block;
-
-  width: 100%;
-
-  max-width: 600px;
-
-  margin: auto;
-
-  text-decoration: none;
-
+#locationSection a{
+  display:block;
+  width:100%;
+  margin:0;
+  padding:0;
 }
 
 
-.location-image {
-
-  display: block;
-
-  width: 100%;
-
-  height: auto;
-
+#locationSection img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+  padding:0;
 }
 
 
-/* زر الخريطة */
+/* زر الموقع فوق الصورة */
 
-.map-button {
+#mapButton{
+  position:absolute;
 
-  position: absolute;
+  left:50%;
+  bottom:8%;
 
-  left: 50%;
+  transform:translateX(-50%);
 
-  bottom: 7%;
+  width:65%;
+  max-width:280px;
 
-  transform: translateX(-50%);
+  padding:13px 20px;
 
-  width:
-    min(
-      300px,
-      80%
-    );
+  line-height:1.3;
 
-  padding: 14px 25px;
+  border-radius:40px;
 
-  border-radius: 50px;
+  background:#a87a35;
 
-  background: #a87a35;
+  color:#fffaf1;
 
-  color: white;
+  text-align:center;
 
-  text-align: center;
+  text-decoration:none;
 
-  text-decoration: none;
+  font-size:15px;
 
-  font-size: 16px;
-
-  z-index: 20;
-
+  z-index:20;
 }
 
 
-/* ==================================
+/* =========================================
    الكمبيوتر
-================================== */
+========================================= */
 
-@media (min-width: 700px) {
+@media(min-width:700px){
 
-  body {
-
-    background: #eee9df;
-
+  body{
+    background:#e9e4db;
   }
 
-  .page {
-
-    width: 500px;
-
-    margin:
-      0
-      auto;
-
-  }
-
-}
-
-
-/* ==================================
-   تقليل الحركة
-================================== */
-
-@media
-(prefers-reduced-motion: reduce) {
-
-  html {
-
-    scroll-behavior: auto;
-
-  }
-
-  .scroll-arrow {
-
-    animation: none;
-
+  #wedding{
+    box-shadow:0 0 30px rgba(0,0,0,.08);
   }
 
 }
@@ -581,10 +384,9 @@ body {
 <body>
 
 
-
-<!-- ==================================
+<!-- =========================================
      الموسيقى
-================================== -->
+========================================= -->
 
 <audio
   id="music"
@@ -592,57 +394,54 @@ body {
   loop
 >
 
-  <source
-    src="music.mp3"
-    type="audio/mpeg"
-  >
+<source
+  src="music.mp3"
+  type="audio/mpeg"
+>
 
 </audio>
 
-
-
-<!-- زر الموسيقى -->
 
 <button
   id="musicButton"
   type="button"
   aria-label="تشغيل أو إيقاف الموسيقى"
 >
-
 ♫
-
 </button>
 
 
 
-<!-- ==================================
-     1
-     فتح المغلف
-================================== -->
+<!-- =========================================
+     الكرت كامل
+========================================= -->
+
+<main id="wedding">
+
+
+<!-- =========================================
+     1 — فيديو فتح المغلف
+========================================= -->
 
 <section
-  class="page"
+  class="section"
   id="intro"
 >
 
-<div class="video-box">
-
-
 <video
   id="introVideo"
+  poster="cover.png"
   preload="auto"
   playsinline
   webkit-playsinline
-  poster="cover.png"
 >
 
-  <source
-    src="open.mp4"
-    type="video/mp4"
-  >
+<source
+  src="open.mp4"
+  type="video/mp4"
+>
 
 </video>
-
 
 
 <button
@@ -653,150 +452,99 @@ body {
 </button>
 
 
-
 <div id="openText">
-
 اضغطي لفتح الدعوة
-
-</div>
-
-
 </div>
 
 </section>
 
 
 
-<!-- ==================================
-     2
-     Save The Date
-================================== -->
+<!-- =========================================
+     2 — Save The Date
+========================================= -->
 
 <section
-  class="page"
-  id="save"
+  class="section"
+  id="saveSection"
 >
-
 
 <img
   src="save.png"
-  class="full-image"
   alt="Save the Date"
 >
-
-
-<div class="scroll-arrow">
-
-⌄
-
-</div>
-
 
 </section>
 
 
 
-<!-- ==================================
-     3
-     صفحة المعلومات
-================================== -->
+<!-- =========================================
+     3 — المعلومات
+========================================= -->
 
 <section
-  class="page"
-  id="info"
+  class="section"
+  id="infoSection"
+>
+
+<img
+  src="info.png"
+  alt="معلومات حفل الزفاف"
+>
+
+</section>
+
+
+
+<!-- =========================================
+     4 — التايمر
+========================================= -->
+
+<section
+  class="section"
+  id="timerSection"
 >
 
 
 <img
-  src="info.png"
-  class="full-image"
-  alt="معلومات حفل الزفاف"
+  src="timer.png"
+  id="timerImage"
+  alt="العد التنازلي"
 >
 
 
-<div class="scroll-arrow">
+<!-- الأرقام الحقيقية -->
 
-⌄
-
-</div>
-
-
-</section>
-
-
-
-<!-- ==================================
-     4
-     التايمر
-================================== -->
-
-<section
-  class="page"
-  id="timer"
->
-
-
-<div class="timer-page">
-
-
-<!-- يوم -->
 
 <div
-  class="timer-number days-number"
+  class="timer-number"
   id="days"
 >
-
 0
-
 </div>
 
 
-
-<!-- ساعة -->
-
 <div
-  class="timer-number hours-number"
+  class="timer-number"
   id="hours"
 >
-
 00
-
 </div>
 
 
-
-<!-- دقيقة -->
-
 <div
-  class="timer-number minutes-number"
+  class="timer-number"
   id="minutes"
 >
-
 00
-
 </div>
 
-
-
-<!-- ثانية -->
 
 <div
-  class="timer-number seconds-number"
+  class="timer-number"
   id="seconds"
 >
-
 00
-
-</div>
-
-
-</div>
-
-
-<div class="scroll-arrow">
-
-⌄
-
 </div>
 
 
@@ -804,19 +552,17 @@ body {
 
 
 
-<!-- ==================================
-     5
-     الموقع
-================================== -->
+<!-- =========================================
+     5 — الموقع
+========================================= -->
 
 <section
-  class="page"
-  id="location"
+  class="section"
+  id="locationSection"
 >
 
 
 <a
-  class="location-link"
   href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
   target="_blank"
   rel="noopener"
@@ -825,7 +571,6 @@ body {
 
 <img
   src="map.png"
-  class="location-image"
   alt="موقع حفل الزفاف"
 >
 
@@ -833,9 +578,8 @@ body {
 </a>
 
 
-
 <a
-  class="map-button"
+  id="mapButton"
   href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
   target="_blank"
   rel="noopener"
@@ -849,141 +593,105 @@ body {
 </section>
 
 
+</main>
+
+
 
 <script>
 
 
-/* ==================================
+/* =========================================
    العناصر
-================================== */
+========================================= */
 
 const video =
-document.getElementById(
-  "introVideo"
-);
+document.getElementById("introVideo");
 
 
 const openButton =
-document.getElementById(
-  "openButton"
-);
+document.getElementById("openButton");
 
 
 const openText =
-document.getElementById(
-  "openText"
-);
+document.getElementById("openText");
 
 
 const music =
-document.getElementById(
-  "music"
-);
+document.getElementById("music");
 
 
 const musicButton =
-document.getElementById(
-  "musicButton"
-);
+document.getElementById("musicButton");
 
 
-let opened =
-false;
+let opened = false;
 
 
 
-/* ==================================
+/* =========================================
    فتح الدعوة
-================================== */
+========================================= */
 
 openButton.addEventListener(
-
 "click",
 
-async function() {
+async function(){
 
 
-if (opened) {
-
-return;
-
+if(opened){
+  return;
 }
 
 
-opened =
-true;
+opened = true;
 
 
-/* إخفاء عبارة فتح */
+/* نخفي اضغطي لفتح الدعوة */
 
-openText.style.opacity =
-"0";
+openText.style.opacity = "0";
 
 
-openButton.style.pointerEvents =
-"none";
+openButton.style.pointerEvents = "none";
 
 
 
-/* ==================================
-   تشغيل الموسيقى فورًا
-================================== */
+/* =========================================
+   الموسيقى تبدأ فور الضغط
+========================================= */
 
-try {
+try{
 
+  music.volume = 0.6;
 
-music.volume =
-0.60;
+  await music.play();
 
+  musicButton.textContent = "❚❚";
 
-await music.play();
+  musicButton.classList.add("playing");
 
+}
+catch(error){
 
-musicButton.innerHTML =
-"❚❚";
-
-
-musicButton.classList.add(
-  "playing"
-);
-
-
-} catch(error) {
-
-
-console.log(
-  "المتصفح منع تشغيل الموسيقى"
-);
-
+  console.log("تعذر تشغيل الموسيقى");
 
 }
 
 
 
-/* ==================================
-   تشغيل فيديو فتح المغلف
-================================== */
+/* =========================================
+   تشغيل الفيديو
+========================================= */
 
-try {
+try{
 
+  video.currentTime = 0;
 
-video.currentTime =
-0;
+  await video.play();
 
+}
+catch(error){
 
-await video.play();
-
-
-} catch(error) {
-
-
-console.log(
-  "تعذر تشغيل فيديو المغلف"
-);
-
-
-goToSave();
-
+  goToSave();
 
 }
 
@@ -994,19 +702,16 @@ goToSave();
 
 
 
-/* ==================================
-   عندما ينتهي فيديو المغلف
-================================== */
+/* =========================================
+   عند انتهاء فيديو فتح المغلف
+========================================= */
 
 video.addEventListener(
-
 "ended",
 
-function() {
+function(){
 
-
-goToSave();
-
+  goToSave();
 
 }
 
@@ -1014,70 +719,51 @@ goToSave();
 
 
 
-/* ==================================
-   الانتقال إلى Save The Date
-================================== */
+/* =========================================
+   الانتقال إلى Save the Date
+========================================= */
 
-function goToSave() {
-
+function goToSave(){
 
 document
-.getElementById(
-  "save"
-)
+.getElementById("saveSection")
 .scrollIntoView({
 
-behavior:
-"smooth",
+  behavior:"smooth",
 
-block:
-"start"
+  block:"start"
 
 });
 
-
 }
 
 
 
-/* ==================================
-   زر الموسيقى
-================================== */
+/* =========================================
+   تشغيل / إيقاف الموسيقى
+========================================= */
 
 musicButton.addEventListener(
-
 "click",
 
-async function() {
+async function(){
 
 
-/* إذا كانت متوقفة */
-
-if (music.paused) {
+if(music.paused){
 
 
-try {
+try{
 
+  await music.play();
 
-await music.play();
+  musicButton.textContent = "❚❚";
 
+  musicButton.classList.add("playing");
 
-musicButton.innerHTML =
-"❚❚";
+}
+catch(error){
 
-
-musicButton.classList.add(
-  "playing"
-);
-
-
-} catch(error) {
-
-
-console.log(
-  "تعذر تشغيل الموسيقى"
-);
-
+  console.log("تعذر تشغيل الموسيقى");
 
 }
 
@@ -1085,21 +771,14 @@ console.log(
 }
 
 
-/* إذا كانت تعمل */
-
-else {
+else{
 
 
 music.pause();
 
+musicButton.textContent = "♫";
 
-musicButton.innerHTML =
-"♫";
-
-
-musicButton.classList.remove(
-  "playing"
-);
+musicButton.classList.remove("playing");
 
 
 }
@@ -1111,67 +790,49 @@ musicButton.classList.remove(
 
 
 
-/* ==================================
-   تاريخ العرس
+/* =========================================
+   تاريخ الزفاف
 
    27 / 7 / 2027
-
-   الساعة 7 مساء
-================================== */
+   الساعة 7 مساءً
+========================================= */
 
 const weddingDate =
 new Date(
 
 2027,
-
 6,
-
 27,
-
 19,
-
 0,
-
 0
 
 );
 
 
 
-/* ==================================
-   عناصر العداد
-================================== */
-
 const daysElement =
-document.getElementById(
-  "days"
-);
+document.getElementById("days");
 
 
 const hoursElement =
-document.getElementById(
-  "hours"
-);
+document.getElementById("hours");
 
 
 const minutesElement =
-document.getElementById(
-  "minutes"
-);
+document.getElementById("minutes");
 
 
 const secondsElement =
-document.getElementById(
-  "seconds"
-);
+document.getElementById("seconds");
 
 
 
-/* ==================================
-   تحديث العداد
-================================== */
+/* =========================================
+   تحديث العد التنازلي
+========================================= */
 
-function updateCountdown() {
+function updateCountdown(){
 
 
 const now =
@@ -1183,50 +844,34 @@ weddingDate - now;
 
 
 
-/* انتهى الموعد */
-
-if (
-difference <= 0
-) {
+if(difference <= 0){
 
 
-daysElement.textContent =
-"0";
+daysElement.textContent = "0";
 
+hoursElement.textContent = "00";
 
-hoursElement.textContent =
-"00";
+minutesElement.textContent = "00";
 
-
-minutesElement.textContent =
-"00";
-
-
-secondsElement.textContent =
-"00";
+secondsElement.textContent = "00";
 
 
 return;
-
 
 }
 
 
 
-/* ==================================
-   الحساب
-================================== */
-
 const totalSeconds =
 Math.floor(
-  difference / 1000
+difference / 1000
 );
 
 
 
 const days =
 Math.floor(
-  totalSeconds / 86400
+totalSeconds / 86400
 );
 
 
@@ -1258,100 +903,37 @@ totalSeconds % 60;
 
 
 
-/* ==================================
-   عرض الأرقام
-================================== */
-
 daysElement.textContent =
 String(days);
 
 
 hoursElement.textContent =
 String(hours)
-.padStart(
-  2,
-  "0"
-);
+.padStart(2,"0");
 
 
 minutesElement.textContent =
 String(minutes)
-.padStart(
-  2,
-  "0"
-);
+.padStart(2,"0");
 
 
 secondsElement.textContent =
 String(seconds)
-.padStart(
-  2,
-  "0"
-);
+.padStart(2,"0");
 
 
 }
 
 
 
-/* تشغيل العداد مباشرة */
+/* تشغيل العداد */
 
 updateCountdown();
 
 
-
-/* تحديث كل ثانية */
-
 setInterval(
-
 updateCountdown,
-
 1000
-
-);
-
-
-
-/* ==================================
-   في حال لم يعمل الفيديو
-================================== */
-
-video.addEventListener(
-
-"error",
-
-function() {
-
-
-console.log(
-  "تأكدي من وجود open.mp4"
-);
-
-
-}
-
-);
-
-
-
-/* ==================================
-   في حال لم تعمل الموسيقى
-================================== */
-
-music.addEventListener(
-
-"error",
-
-function() {
-
-
-console.log(
-  "تأكدي من وجود music.mp3"
-);
-
-
-}
-
 );
 
 
