@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>دعوة زفاف</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #fffaf1;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    :root {
+      --cream: #fffaf1;
+      --gold: #a87a35;
+    }
+
+    #pages {
+      width: 100%;
+      height: 100vh;
+
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+
+      -webkit-overflow-scrolling: touch;
+
+      background: var(--cream);
+    }
+
+    .page {
+      position: relative;
+
+      width: 100%;
+      height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      overflow: hidden;
+
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+
+      background: var(--cream);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+      object-position: center;
+
+      display: block;
+
+      background: var(--cream);
+    }
+
+    /* ========================= */
+    /* صفحة فتح المغلف */
+    /* ========================= */
+
+    #intro {
+      background: var(--cream);
+    }
+
+    #introVideo {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      background: var(--cream);
+    }
+
+    #openBtn {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      border: none;
+      background: transparent;
+
+      cursor: pointer;
+
+      z-index: 5;
+    }
+
+    #openHint {
+      position: absolute;
+
+      left: 50%;
+      bottom: 7%;
+
+      transform: translateX(-50%);
+
+      padding: 10px 18px;
+
+      border-radius: 30px;
+
+      border: 1px solid rgba(168, 122, 53, 0.45);
+
+      background: rgba(255, 250, 241, 0.92);
+
+      color: #875f26;
+
+      font-size: 15px;
+
+      pointer-events: none;
+
+      z-index: 6;
+
+      transition: opacity 0.3s ease;
+
+      white-space: nowrap;
+    }
+
+    /* ========================= */
+    /* زر الموسيقى */
+    /* ========================= */
+
+    #musicBtn {
+      position: fixed;
+
+      left: 16px;
+      bottom: 18px;
+
+      z-index: 999;
+
+      width: 48px;
+      height: 48px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(168, 122, 53, 0.45);
+
+      background: rgba(255, 250, 241, 0.95);
+
+      color: var(--gold);
+
+      font-size: 20px;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========================= */
+    /* صفحة العد التنازلي */
+    /* ========================= */
+
+    .timer-wrap {
+      position: relative;
+
+      width: 100%;
+      height: 100vh;
+
+      background: var(--cream);
+    }
+
+    .timer-bg {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .timer-value {
+      position: absolute;
+
+      top: 72.8%;
+
+      transform: translate(-50%, -50%);
+
+      color: #a87a35;
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: clamp(24px, 6vw, 48px);
+
+      font-weight: 500;
+
+      z-index: 3;
+
+      direction: ltr;
+
+      text-align: center;
+    }
+
+    #days {
+      left: 78.2%;
+    }
+
+    #hours {
+      left: 59%;
+    }
+
+    #minutes {
+      left: 39.6%;
+    }
+
+    #seconds {
+      left: 20.2%;
+    }
+
+    /* ========================= */
+    /* سهم السحب */
+    /* ========================= */
+
+    .swipe-hint {
+      position: absolute;
+
+      left: 50%;
+      bottom: 12px;
+
+      transform: translateX(-50%);
+
+      color: rgba(135, 95, 38, 0.65);
+
+      font-size: 22px;
+
+      z-index: 10;
+
+      pointer-events: none;
+    }
+
+    /* ========================= */
+    /* الكمبيوتر */
+    /* ========================= */
+
+    @media (min-width: 800px) {
+
+      .page,
+      .timer-wrap {
+        max-width: 520px;
+
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #pages {
+        background: #eee8de;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================= -->
+  <!-- الموسيقى -->
+  <!-- ========================= -->
+
+  <audio id="music" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button
+    id="musicBtn"
+    type="button"
+    aria-label="تشغيل أو إيقاف الموسيقى"
+  >
+    ♫
+  </button>
+
+
+  <!-- ========================= -->
+  <!-- كل صفحات الدعوة -->
+  <!-- ========================= -->
+
+  <main id="pages">
+
+
+    <!-- ========================= -->
+    <!-- 1. فيديو فتح المغلف -->
+    <!-- ========================= -->
+
+    <section class="page" id="intro">
+
+      <video
+        id="introVideo"
+        src="open.mp4"
+        playsinline
+        preload="auto"
+        poster="cover.png"
+      ></video>
+
+      <button
+        id="openBtn"
+        type="button"
+        aria-label="فتح الدعوة"
+      ></button>
+
+      <div id="openHint">
+        اضغطي لفتح الدعوة
+      </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- 2. Save The Date -->
+    <!-- ========================= -->
+
+    <section class="page" id="saveDate">
+
+      <img
+        class="card-image"
+        src="save.png"
+        alt="Save the Date"
+      />
+
+      <div class="swipe-hint">
+        ⌄
+      </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- 3. صفحة المعلومات -->
+    <!-- ========================= -->
+
+    <section class="page" id="information">
+
+      <img
+        class="card-image"
+        src="info.png"
+        alt="معلومات حفل الزفاف"
+      />
+
+      <div class="swipe-hint">
+        ⌄
+      </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- 4. صفحة العد التنازلي -->
+    <!-- ========================= -->
+
+    <section class="page" id="countdown">
+
+      <div class="timer-wrap">
+
+        <img
+          class="timer-bg"
+          src="timer.png"
+          alt="العد التنازلي"
+        />
+
+        <span
+          class="timer-value"
+          id="days"
+        >
+          000
+        </span>
+
+        <span
+          class="timer-value"
+          id="hours"
+        >
+          00
+        </span>
+
+        <span
+          class="timer-value"
+          id="minutes"
+        >
+          00
+        </span>
+
+        <span
+          class="timer-value"
+          id="seconds"
+        >
+          00
+        </span>
+
+        <div class="swipe-hint">
+          ⌄
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- 5. صفحة الموقع -->
+    <!-- ========================= -->
+
+    <section class="page" id="location">
+
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Orchida+Ramallah"
+        target="_blank"
+        rel="noopener"
+        style="
+          display: block;
+          width: 100%;
+          height: 100%;
+        "
+      >
+
+        <img
+          class="card-image"
+          src="map.png"
+          alt="قاعة أوركيدا - رام الله"
+        />
+
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+  <script>
+
+    /* ========================= */
+    /* العناصر */
+    /* ========================= */
+
+    const video =
+      document.getElementById("introVideo");
+
+    const openBtn =
+      document.getElementById("openBtn");
+
+    const openHint =
+      document.getElementById("openHint");
+
+    const music =
+      document.getElementById("music");
+
+    const musicBtn =
+      document.getElementById("musicBtn");
+
+    let invitationOpened = false;
+
+
+    /* ========================= */
+    /* فتح الدعوة */
+    /* ========================= */
+
+    openBtn.addEventListener(
+      "click",
+      async function () {
+
+        if (invitationOpened) {
+          return;
+        }
+
+        invitationOpened = true;
+
+        openHint.style.opacity = "0";
+
+        openBtn.style.pointerEvents = "none";
+
+
+        /* تشغيل الموسيقى */
+
+        try {
+
+          music.volume = 0.65;
+
+          await music.play();
+
+          musicBtn.textContent = "❚❚";
+
+        } catch (error) {
+
+          console.log(
+            "تعذر تشغيل الموسيقى تلقائياً"
+          );
+
+        }
+
+
+        /* تشغيل فيديو فتح المغلف */
+
+        try {
+
+          video.currentTime = 0;
+
+          await video.play();
+
+        } catch (error) {
+
+          goToSaveDate();
+
+        }
+
+      }
+    );
+
+
+    /* ========================= */
+    /* بعد انتهاء الفيديو */
+    /* ========================= */
+
+    video.addEventListener(
+      "ended",
+      function () {
+
+        goToSaveDate();
+
+      }
+    );
+
+
+    function goToSaveDate() {
+
+      const saveDate =
+        document.getElementById("saveDate");
+
+      saveDate.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }
+
+
+    /* ========================= */
+    /* زر الموسيقى */
+    /* ========================= */
+
+    musicBtn.addEventListener(
+      "click",
+      async function () {
+
+        if (music.paused) {
+
+          try {
+
+            await music.play();
+
+            musicBtn.textContent = "❚❚";
+
+          } catch (error) {
+
+            console.log(
+              "تعذر تشغيل الموسيقى"
+            );
+
+          }
+
+        } else {
+
+          music.pause();
+
+          musicBtn.textContent = "♫";
+
+        }
+
+      }
+    );
+
+
+    /* ========================= */
+    /* تاريخ الزفاف */
+    /* 27 / 7 / 2027 */
+    /* الساعة 7 مساءً */
+    /* ========================= */
+
+    const weddingDate =
+      new Date(
+        2027,
+        6,
+        27,
+        19,
+        0,
+        0
+      );
+
+
+    const daysEl =
+      document.getElementById("days");
+
+    const hoursEl =
+      document.getElementById("hours");
+
+    const minutesEl =
+      document.getElementById("minutes");
+
+    const secondsEl =
+      document.getElementById("seconds");
+
+
+    /* ========================= */
+    /* تحديث العداد */
+    /* ========================= */
+
+    function updateCountdown() {
+
+      const now =
+        new Date();
+
+      let difference =
+        weddingDate - now;
+
+
+      if (difference <= 0) {
+
+        daysEl.textContent =
+          "0";
+
+        hoursEl.textContent =
+          "00";
+
+        minutesEl.textContent =
+          "00";
+
+        secondsEl.textContent =
+          "00";
+
+        return;
+
+      }
+
+
+      const totalSeconds =
+        Math.floor(
+          difference / 1000
+        );
+
+
+      const days =
+        Math.floor(
+          totalSeconds / 86400
+        );
+
+
+      const hours =
+        Math.floor(
+          (totalSeconds % 86400)
+          / 3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600)
+          / 60
+        );
+
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      daysEl.textContent =
+        String(days);
+
+
+      hoursEl.textContent =
+        String(hours)
+        .padStart(
+          2,
+          "0"
+        );
+
+
+      minutesEl.textContent =
+        String(minutes)
+        .padStart(
+          2,
+          "0"
+        );
+
+
+      secondsEl.textContent =
+        String(seconds)
+        .padStart(
+          2,
+          "0"
+        );
+
+    }
+
+
+    updateCountdown();
+
+
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
+  </script>
+
+</body>
+</html>
