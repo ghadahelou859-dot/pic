@@ -1,105 +1,444 @@
-Create an elegant 8-second vertical 9:16 promotional video for a luxury digital wedding invitation website.
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دعوة زفاف محمد ولين</title>
 
-The video is designed for TikTok and Snapchat Stories.
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-SCENE CONCEPT:
-A single elegant feminine hand is holding a smartphone in a refined and graceful way. The phone is clearly visible and centered in the frame. Add a second elegant feminine hand that enters only to tap the phone screen. Keep one fixed background and one stable composition throughout the entire video.
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #f7f3ed;
+      font-family: Arial, sans-serif;
+    }
 
-VISUAL STYLE:
-- Luxury ivory-white wedding aesthetic
-- Champagne-gold accents
-- Soft embossed floral paper details
-- Romantic, refined, minimal and premium
-- Warm soft lighting
-- Smooth cinematic transitions
-- Clean elegant composition
-- No clutter
-- No camera shake
-- No aggressive movement
-- No flashy effects
+    /* شاشة البداية */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #f7f3ed;
+    }
 
-0.0–2.0 SECONDS:
-Show one elegant feminine hand holding the smartphone steadily.
-The smartphone screen displays the luxury digital wedding invitation homepage.
-On the screen, show a centered ivory-white envelope with a champagne-gold wax seal engraved clearly with:
-بسم الله الرحمن الرحيم
+    #intro img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-Below the envelope, show the elegant button:
-اضغط هنا
+    #openButton {
+      position: absolute;
+      left: 50%;
+      bottom: 18%;
+      transform: translateX(-50%);
+      z-index: 120;
 
-IMPORTANT:
-At this stage, the invitation card must NOT be visible.
-Nothing from inside the envelope should be visible.
-Do not show any part of the card before opening.
-The envelope must appear fully closed and conceal everything inside.
+      border: none;
+      outline: none;
 
-2.0–3.0 SECONDS:
-A second elegant feminine hand enters naturally and gently taps the “اضغط هنا” button on the phone screen.
+      padding: 15px 34px;
+      border-radius: 45px;
 
-3.0–5.5 SECONDS:
-Inside the smartphone screen, the envelope animation begins.
-First, the champagne-gold wax seal gently separates as one complete piece.
-Then the envelope flap opens slowly and gracefully upward.
+      background: rgba(255, 255, 255, 0.94);
+      color: #b58d4c;
 
-VERY IMPORTANT:
-Do not show the invitation card before the flap starts opening.
-Do not reveal anything from inside the envelope until the envelope has opened.
-Only after the envelope opens should the next content appear.
+      font-size: 20px;
+      font-weight: 600;
 
-The movement must feel:
-- slow
-- graceful
-- luxurious
-- realistic
-- cinematic
+      cursor: pointer;
 
-5.5–7.0 SECONDS:
-After the envelope opens, create a smooth elegant transition inside the smartphone screen to the next page.
+      box-shadow: 0 5px 20px rgba(0,0,0,0.10);
 
-Show a refined preview of the SAVE THE DATE page first.
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-Then show a quick preview of the countdown page.
+    /* شاشة الفيديو */
+    #videoScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: none;
+      background: #f7f3ed;
+    }
 
-IMPORTANT FOR THE COUNTDOWN:
-The countdown must be designed in elegant circular timer elements.
-Each time unit should appear inside a separate circle:
-- days in one circle
-- hours in one circle
-- minutes in one circle
-- seconds in one circle
+    #openingVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-The circular countdown design should feel:
-- minimal
-- luxurious
-- clean
-- ivory-white and champagne-gold
-- consistent with the wedding branding
+    /* الصفحات */
+    #pages {
+      position: fixed;
+      inset: 0;
+      display: none;
 
-Do not use rectangular countdown boxes.
-Use only elegant circular countdown shapes.
+      overflow-y: auto;
+      overflow-x: hidden;
 
-7.0–8.0 SECONDS:
-End with the smartphone still in the same hand and the same fixed background.
-Show a refined final call-to-action on the phone screen or elegantly beside it:
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
 
-افتحوا الدعوة كاملة 🤍
-الرابط في البايو
+      -webkit-overflow-scrolling: touch;
 
-IMPORTANT:
-- Vertical 9:16
-- Exactly 8 seconds
-- Designed for TikTok and Snapchat
-- Keep all important elements inside the center safe area
-- The phone must remain clearly visible
-- The invitation must appear only inside the smartphone screen
-- Use one fixed background only
-- Keep the composition stable and clean
-- No part of the card should be visible before the envelope opens
-- Nothing should appear from inside the envelope until after opening
-- The envelope must stay fully closed before the tap and opening
-- The countdown must be circular, not rectangular
-- Preserve the ivory-white and champagne-gold visual identity
-- No distorted Arabic writing
-- No unnecessary effects
-- No excessive hand movement
-- Clean sophisticated luxury wedding atmosphere
+      background: #f7f3ed;
+    }
+
+    .page {
+      width: 100%;
+      height: 100svh;
+      position: relative;
+
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+
+      overflow: hidden;
+      background: #f7f3ed;
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* العد التنازلي */
+    .countdown-page {
+      position: relative;
+    }
+
+    .countdown-live {
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 82%;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5%;
+
+      direction: ltr;
+      z-index: 20;
+
+      pointer-events: none;
+    }
+
+    .count-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .count-item span {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 8vw, 52px);
+      color: #b58d4c;
+      line-height: 1;
+    }
+
+    /* زر الموقع */
+    .map-button {
+      position: absolute;
+
+      left: 50%;
+      transform: translateX(-50%);
+
+      bottom: 17%;
+
+      width: 64%;
+      height: 8%;
+
+      z-index: 20;
+
+      background: transparent;
+    }
+
+    /* زر الموسيقى */
+    #musicButton {
+      position: fixed;
+
+      right: 18px;
+      bottom: 24px;
+
+      z-index: 300;
+
+      width: 52px;
+      height: 52px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(181, 141, 76, 0.45);
+
+      background: rgba(255,255,255,0.92);
+      color: #b58d4c;
+
+      font-size: 23px;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+
+      touch-action: manipulation;
+    }
+
+    @media (min-width: 700px) {
+      body {
+        background: #e8e2da;
+      }
+
+      #intro,
+      #videoScreen,
+      #pages {
+        width: 500px;
+        max-width: 100%;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      #musicButton {
+        right: calc(50% - 230px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. المغلف -->
+  <section id="intro">
+    <img src="./envelope.jpeg" alt="المغلف" />
+
+    <button id="openButton" type="button">
+      اضغط هنا
+    </button>
+  </section>
+
+  <!-- 2. فيديو فتح المغلف -->
+  <section id="videoScreen">
+    <video
+      id="openingVideo"
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      muted
+    >
+      <source src="./opening.mp4" type="video/mp4" />
+    </video>
+  </section>
+
+  <!-- الموسيقى -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="./music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- زر الموسيقى -->
+  <button id="musicButton" type="button" aria-label="تشغيل أو إيقاف الموسيقى">
+    ♪
+  </button>
+
+  <!-- الصفحات -->
+  <main id="pages">
+
+    <!-- Save The Date -->
+    <section class="page">
+      <img src="./save-the-date.jpeg" alt="Save The Date" />
+    </section>
+
+    <!-- العد التنازلي -->
+    <section class="page countdown-page">
+      <img src="./countdown.jpeg" alt="العد التنازلي" />
+
+      <div class="countdown-live">
+        <div class="count-item">
+          <span id="days">00</span>
+        </div>
+
+        <div class="count-item">
+          <span id="hours">00</span>
+        </div>
+
+        <div class="count-item">
+          <span id="minutes">00</span>
+        </div>
+
+        <div class="count-item">
+          <span id="seconds">00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- معلومات العرس -->
+    <section class="page">
+      <img src="./wedding-info.jpeg" alt="معلومات العرس" />
+    </section>
+
+    <!-- الموقع -->
+    <section class="page">
+      <img src="./location.jpeg" alt="موقع العرس" />
+
+      <a
+        class="map-button"
+        href="https://maps.app.goo.gl/3LUZ8aMZ1nCqh6jG7?g_st=ic"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="فتح الموقع على الخريطة"
+      ></a>
+    </section>
+
+  </main>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const openButton = document.getElementById("openButton");
+    const videoScreen = document.getElementById("videoScreen");
+    const openingVideo = document.getElementById("openingVideo");
+    const pages = document.getElementById("pages");
+
+    const bgMusic = document.getElementById("bgMusic");
+    const musicButton = document.getElementById("musicButton");
+
+    let musicPlaying = false;
+
+    openButton.addEventListener("click", function () {
+      videoScreen.style.display = "block";
+
+      openingVideo.currentTime = 0;
+      openingVideo.muted = true;
+
+      bgMusic.currentTime = 0;
+      bgMusic.volume = 0.45;
+
+      openingVideo.play()
+        .then(function () {
+          intro.style.display = "none";
+
+          return bgMusic.play();
+        })
+        .then(function () {
+          musicPlaying = true;
+          musicButton.textContent = "♫";
+          musicButton.style.display = "flex";
+        })
+        .catch(function (error) {
+          console.log("Playback error:", error);
+
+          intro.style.display = "none";
+          musicButton.style.display = "flex";
+        });
+    });
+
+    openingVideo.addEventListener("ended", function () {
+      videoScreen.style.display = "none";
+      pages.style.display = "block";
+
+      pages.scrollTo({
+        top: 0,
+        behavior: "auto"
+      });
+    });
+
+    musicButton.addEventListener("click", function () {
+      if (musicPlaying) {
+        bgMusic.pause();
+        musicPlaying = false;
+        musicButton.textContent = "♪";
+      } else {
+        bgMusic.play()
+          .then(function () {
+            musicPlaying = true;
+            musicButton.textContent = "♫";
+          })
+          .catch(function (error) {
+            console.log("Music error:", error);
+          });
+      }
+    });
+
+    bgMusic.addEventListener("pause", function () {
+      musicPlaying = false;
+      musicButton.textContent = "♪";
+    });
+
+    bgMusic.addEventListener("play", function () {
+      musicPlaying = true;
+      musicButton.textContent = "♫";
+    });
+
+    /* العد التنازلي
+       26 / 10 / 2026
+       الساعة 7 مساءً
+    */
+
+    const weddingDate = new Date("2026-10-26T19:00:00+02:00");
+
+    function updateCountdown() {
+      const now = new Date();
+
+      const distance =
+        weddingDate.getTime() - now.getTime();
+
+      if (distance <= 0) {
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+        return;
+      }
+
+      const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+      );
+
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+      );
+
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+      );
+
+      const seconds = Math.floor(
+        (distance % (1000 * 60)) / 1000
+      );
+
+      document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
+
+      document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+      document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+      document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
