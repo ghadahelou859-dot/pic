@@ -12,6 +12,7 @@
   <title>دعوة زفاف</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -20,8 +21,11 @@
     body {
       margin: 0;
       padding: 0;
+
       background: #fffaf1;
+
       font-family: Tahoma, Arial, sans-serif;
+
       scroll-behavior: smooth;
     }
 
@@ -34,237 +38,408 @@
       --gold: #a87a35;
     }
 
-    /* =========================
-       الحاوية الرئيسية
-    ========================= */
-
-    #wedding {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--cream);
-      overflow: hidden;
-    }
 
     /* =========================
-       البداية فقط
+       صفحة البداية
     ========================= */
 
     #intro {
+
       position: relative;
+
       width: 100%;
       max-width: 600px;
-      min-height: 100vh;
+
+      height: 100vh;
+
       margin: 0 auto;
+
       background: var(--cream);
+
       overflow: hidden;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
     }
+
 
     #introVideo {
+
       display: block;
+
       width: 100%;
       height: 100vh;
+
       object-fit: contain;
+
       background: var(--cream);
+
     }
+
+
+    /* زر شفاف فوق الفيديو */
 
     #openButton {
+
       position: absolute;
+
       inset: 0;
+
       width: 100%;
       height: 100%;
+
       border: 0;
+
       background: transparent;
+
       cursor: pointer;
+
       z-index: 10;
+
     }
 
+
+    /* عبارة فتح الدعوة */
+
     #openText {
+
       position: absolute;
+
       left: 50%;
       bottom: 7%;
+
       transform: translateX(-50%);
+
       z-index: 11;
 
       padding: 10px 18px;
 
       border-radius: 30px;
-      border: 1px solid rgba(168,122,53,.45);
 
-      background: rgba(255,250,241,.92);
+      border:
+        1px solid
+        rgba(168, 122, 53, 0.45);
+
+      background:
+        rgba(255, 250, 241, 0.94);
+
       color: #936a32;
 
       font-size: 14px;
+
       white-space: nowrap;
 
       pointer-events: none;
-      transition: opacity .35s ease;
+
+      transition:
+        opacity 0.35s ease;
+
     }
 
+
     /* =========================
-       باقي الدعوة مخفي بالبداية
+       باقي الدعوة
+       مخفية في البداية
     ========================= */
 
     #content {
+
       display: none;
+
       width: 100%;
       max-width: 600px;
+
       margin: 0 auto;
+
       padding: 0;
+
       background: var(--cream);
+
+      overflow: hidden;
+
     }
+
+
+    /* =========================
+       كل قسم
+    ========================= */
 
     .section {
+
       position: relative;
+
       width: 100%;
+
       margin: 0;
+
       padding: 0;
+
       line-height: 0;
+
       background: var(--cream);
+
     }
 
+
     .section img {
+
       display: block;
+
       width: 100%;
       height: auto;
+
       margin: 0;
+
       padding: 0;
+
       border: 0;
+
     }
+
 
     /* =========================
        زر الموسيقى
     ========================= */
 
     #musicButton {
+
       position: fixed;
+
       left: 16px;
       bottom: 18px;
+
       z-index: 9999;
 
       width: 48px;
       height: 48px;
 
       border-radius: 50%;
-      border: 1px solid rgba(168,122,53,.45);
 
-      background: rgba(255,250,241,.96);
+      border:
+        1px solid
+        rgba(168,122,53,.45);
+
+      background:
+        rgba(255,250,241,.96);
+
       color: var(--gold);
 
       font-size: 18px;
+
       cursor: pointer;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.08);
+
     }
 
+
     #musicButton.playing {
+
       background: var(--gold);
+
       color: var(--cream);
+
     }
+
 
     /* =========================
        التايمر
     ========================= */
 
     #timerSection {
+
       position: relative;
+
       width: 100%;
+
       margin: 0;
+
       padding: 0;
+
       line-height: 0;
+
     }
+
 
     #timerImage {
+
       display: block;
+
       width: 100%;
       height: auto;
+
+      margin: 0;
+
+      padding: 0;
+
     }
 
+
+    /* =========================
+       أرقام التايمر
+    ========================= */
+
     .timer-number {
+
       position: absolute;
-      transform: translate(-50%, -50%);
+
+      transform:
+        translate(-50%, -50%);
+
       z-index: 30;
 
       min-width: 42px;
 
       color: var(--gold);
 
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(18px, 5vw, 34px);
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          17px,
+          4.3vw,
+          30px
+        );
+
       font-weight: 500;
 
       line-height: 1;
+
       text-align: center;
+
       direction: ltr;
 
-      text-shadow: 0 1px 0 rgba(255,255,255,.75);
+      text-shadow:
+        0 1px 0
+        rgba(255,255,255,.7);
+
     }
 
-    /*
-      أماكن الأرقام على timer.png
-      إذا احتجنا نضبطها لاحقًا نغير فقط النسب هنا
-    */
+
+    /* =========================
+       أماكن الأرقام
+       داخل الدوائر
+    ========================= */
+
+
+    /* يوم */
 
     #days {
+
       left: 78.3%;
-      top: 73.2%;
+
+      top: 78.9%;
+
     }
+
+
+    /* ساعة */
 
     #hours {
+
       left: 59.1%;
-      top: 73.2%;
+
+      top: 78.9%;
+
     }
+
+
+    /* دقيقة */
 
     #minutes {
+
       left: 40%;
-      top: 73.2%;
+
+      top: 78.9%;
+
     }
 
+
+    /* ثانية */
+
     #seconds {
+
       left: 20.8%;
-      top: 73.2%;
+
+      top: 78.9%;
+
     }
+
 
     /* =========================
        الموقع
     ========================= */
 
     #locationSection {
+
       position: relative;
+
       width: 100%;
+
       margin: 0;
+
       padding: 0;
+
       line-height: 0;
+
     }
+
 
     #locationSection a {
+
       display: block;
+
       width: 100%;
+
       margin: 0;
+
       padding: 0;
+
     }
+
 
     #locationSection img {
+
       display: block;
+
       width: 100%;
+
       height: auto;
+
     }
 
+
+    /* زر الموقع */
+
     #mapButton {
+
       position: absolute;
+
       left: 50%;
       bottom: 7%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
+
       z-index: 30;
 
       width: 65%;
+
       max-width: 280px;
 
       padding: 13px 20px;
@@ -272,35 +447,51 @@
       border-radius: 40px;
 
       background: var(--gold);
+
       color: var(--cream);
 
-      line-height: 1.3;
       text-align: center;
+
       text-decoration: none;
 
       font-size: 15px;
+
+      line-height: 1.3;
+
     }
 
+
     /* =========================
-       كمبيوتر
+       الكمبيوتر
     ========================= */
 
     @media (min-width: 700px) {
+
       body {
+
         background: #e9e4db;
+
       }
+
 
       #intro,
       #content {
-        box-shadow: 0 0 30px rgba(0,0,0,.08);
+
+        box-shadow:
+          0 0 30px
+          rgba(0,0,0,.08);
+
       }
+
     }
 
   </style>
+
 </head>
 
 
 <body>
+
 
   <!-- =========================
        الموسيقى
@@ -311,92 +502,128 @@
     preload="auto"
     loop
   >
+
     <source
       src="music.mp3"
       type="audio/mpeg"
     >
+
   </audio>
 
 
   <!-- زر الموسيقى -->
+
   <button
     id="musicButton"
     type="button"
     aria-label="تشغيل أو إيقاف الموسيقى"
   >
+
     ♫
+
   </button>
 
 
   <!-- =========================
-       البداية
+       1 — فتح المغلف
   ========================= -->
 
   <section id="intro">
 
+
     <video
       id="introVideo"
+
       poster="cover.png"
+
       preload="auto"
+
       playsinline
+
       webkit-playsinline
     >
+
       <source
         src="open.mp4"
         type="video/mp4"
       >
+
     </video>
 
 
     <button
       id="openButton"
+
       type="button"
+
       aria-label="فتح الدعوة"
-    ></button>
+    >
+    </button>
 
 
     <div id="openText">
+
       اضغطي لفتح الدعوة
+
     </div>
+
 
   </section>
 
 
+
   <!-- =========================
-       باقي الدعوة
+       باقي الكرت
   ========================= -->
 
   <main id="content">
 
-    <!-- 1 Save the Date -->
+
+    <!-- =========================
+         Save The Date
+    ========================= -->
+
     <section
       class="section"
       id="saveSection"
     >
+
       <img
         src="save.png"
         alt="Save the Date"
       >
+
     </section>
 
 
-    <!-- 2 المعلومات -->
+
+    <!-- =========================
+         المعلومات
+    ========================= -->
+
     <section
       class="section"
       id="infoSection"
     >
+
       <img
         src="info.png"
         alt="معلومات حفل الزفاف"
       >
+
     </section>
 
 
-    <!-- 3 التايمر -->
+
+    <!-- =========================
+         التايمر
+    ========================= -->
+
     <section
       class="section"
       id="timerSection"
     >
+
 
       <img
         src="timer.png"
@@ -404,99 +631,161 @@
         alt="العد التنازلي"
       >
 
+
+      <!-- يوم -->
+
       <div
         class="timer-number"
         id="days"
       >
+
         0
+
       </div>
+
+
+      <!-- ساعة -->
 
       <div
         class="timer-number"
         id="hours"
       >
+
         00
+
       </div>
+
+
+      <!-- دقيقة -->
 
       <div
         class="timer-number"
         id="minutes"
       >
+
         00
+
       </div>
+
+
+      <!-- ثانية -->
 
       <div
         class="timer-number"
         id="seconds"
       >
+
         00
+
       </div>
+
 
     </section>
 
 
-    <!-- 4 الموقع -->
+
+    <!-- =========================
+         الموقع
+    ========================= -->
+
     <section
       class="section"
       id="locationSection"
     >
 
+
       <a
         href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
+
         target="_blank"
+
         rel="noopener"
       >
+
 
         <img
           src="map.png"
           alt="موقع حفل الزفاف"
         >
 
+
       </a>
 
 
       <a
         id="mapButton"
+
         href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
+
         target="_blank"
+
         rel="noopener"
       >
+
         فتح الموقع
+
       </a>
 
+
     </section>
+
 
   </main>
 
 
+
   <script>
+
 
     /* =========================
        العناصر
     ========================= */
 
     const video =
-      document.getElementById("introVideo");
+      document.getElementById(
+        "introVideo"
+      );
+
 
     const openButton =
-      document.getElementById("openButton");
+      document.getElementById(
+        "openButton"
+      );
+
 
     const openText =
-      document.getElementById("openText");
+      document.getElementById(
+        "openText"
+      );
+
 
     const intro =
-      document.getElementById("intro");
+      document.getElementById(
+        "intro"
+      );
+
 
     const content =
-      document.getElementById("content");
+      document.getElementById(
+        "content"
+      );
+
 
     const music =
-      document.getElementById("music");
+      document.getElementById(
+        "music"
+      );
+
 
     const musicButton =
-      document.getElementById("musicButton");
+      document.getElementById(
+        "musicButton"
+      );
 
-    let opened = false;
+
+    let opened =
+      false;
+
 
 
     /* =========================
@@ -504,87 +793,158 @@
     ========================= */
 
     openButton.addEventListener(
+
       "click",
-      async function () {
+
+      async function() {
+
 
         if (opened) {
+
           return;
+
         }
 
-        opened = true;
 
-        openText.style.opacity = "0";
-
-        openButton.style.pointerEvents = "none";
+        opened =
+          true;
 
 
-        /* الموسيقى تبدأ مع أول ضغطة */
+        /* نخفي عبارة فتح الدعوة */
+
+        openText.style.opacity =
+          "0";
+
+
+        /* نمنع الضغط مرتين */
+
+        openButton.style.pointerEvents =
+          "none";
+
+
+
+        /* =========================
+           تشغيل الموسيقى
+        ========================= */
+
         try {
 
-          music.volume = 0.60;
+
+          music.volume =
+            0.60;
+
 
           await music.play();
 
-          musicButton.textContent = "❚❚";
 
-          musicButton.classList.add("playing");
+          musicButton.textContent =
+            "❚❚";
 
-        } catch (error) {
 
-          console.log("تعذر تشغيل الموسيقى");
+          musicButton.classList.add(
+            "playing"
+          );
+
+
+        } catch(error) {
+
+
+          console.log(
+            "تعذر تشغيل الموسيقى"
+          );
+
 
         }
 
 
-        /* تشغيل فيديو فتح المغلف */
+
+        /* =========================
+           تشغيل الفيديو
+        ========================= */
+
         try {
 
-          video.currentTime = 0;
+
+          video.currentTime =
+            0;
+
 
           await video.play();
 
-        } catch (error) {
 
-          console.log("تعذر تشغيل الفيديو");
+        } catch(error) {
+
+
+          console.log(
+            "تعذر تشغيل الفيديو"
+          );
+
 
           showInvitation();
 
+
         }
 
+
       }
+
     );
 
 
+
     /* =========================
-       عند انتهاء الفيديو
+       بعد انتهاء الفيديو
     ========================= */
 
     video.addEventListener(
+
       "ended",
-      function () {
+
+      function() {
+
 
         showInvitation();
 
+
       }
+
     );
 
 
+
     /* =========================
-       إظهار الدعوة بعد الفيديو فقط
+       إظهار الدعوة
+       بعد انتهاء الفيديو فقط
     ========================= */
 
     function showInvitation() {
 
-      intro.style.display = "none";
 
-      content.style.display = "block";
+      /* نخفي المغلف */
+
+      intro.style.display =
+        "none";
+
+
+      /* نظهر بقية الكرت */
+
+      content.style.display =
+        "block";
+
+
+      /* نبدأ من أول Save The Date */
 
       window.scrollTo({
+
         top: 0,
+
         behavior: "auto"
+
       });
 
+
     }
+
 
 
     /* =========================
@@ -592,95 +952,181 @@
     ========================= */
 
     musicButton.addEventListener(
-      "click",
-      async function () {
 
-        if (music.paused) {
+      "click",
+
+      async function() {
+
+
+        /* إذا الموسيقى متوقفة */
+
+        if (
+          music.paused
+        ) {
+
 
           try {
 
+
             await music.play();
 
-            musicButton.textContent = "❚❚";
 
-            musicButton.classList.add("playing");
+            musicButton.textContent =
+              "❚❚";
 
-          } catch (error) {
 
-            console.log("تعذر تشغيل الموسيقى");
+            musicButton.classList.add(
+              "playing"
+            );
+
+
+          } catch(error) {
+
+
+            console.log(
+              "تعذر تشغيل الموسيقى"
+            );
+
 
           }
 
-        } else {
-
-          music.pause();
-
-          musicButton.textContent = "♫";
-
-          musicButton.classList.remove("playing");
 
         }
 
+
+        /* إذا الموسيقى تعمل */
+
+        else {
+
+
+          music.pause();
+
+
+          musicButton.textContent =
+            "♫";
+
+
+          musicButton.classList.remove(
+            "playing"
+          );
+
+
+        }
+
+
       }
+
     );
+
 
 
     /* =========================
        تاريخ الزفاف
+
        27 / 7 / 2027
-       الساعة 7 مساءً
+
+       الساعة 7 مساء
     ========================= */
 
     const weddingDate =
       new Date(
+
         2027,
+
         6,
+
         27,
+
         19,
+
         0,
+
         0
+
       );
 
 
+
+    /* =========================
+       عناصر التايمر
+    ========================= */
+
     const daysElement =
-      document.getElementById("days");
+      document.getElementById(
+        "days"
+      );
+
 
     const hoursElement =
-      document.getElementById("hours");
+      document.getElementById(
+        "hours"
+      );
+
 
     const minutesElement =
-      document.getElementById("minutes");
+      document.getElementById(
+        "minutes"
+      );
+
 
     const secondsElement =
-      document.getElementById("seconds");
+      document.getElementById(
+        "seconds"
+      );
+
 
 
     /* =========================
-       العداد
+       تحديث التايمر
     ========================= */
 
     function updateCountdown() {
 
-      const now = new Date();
+
+      const now =
+        new Date();
+
 
       let difference =
         weddingDate - now;
 
 
-      if (difference <= 0) {
 
-        daysElement.textContent = "0";
+      /* =========================
+         إذا انتهى الموعد
+      ========================= */
 
-        hoursElement.textContent = "00";
+      if (
+        difference <= 0
+      ) {
 
-        minutesElement.textContent = "00";
 
-        secondsElement.textContent = "00";
+        daysElement.textContent =
+          "0";
+
+
+        hoursElement.textContent =
+          "00";
+
+
+        minutesElement.textContent =
+          "00";
+
+
+        secondsElement.textContent =
+          "00";
+
 
         return;
 
+
       }
 
+
+
+      /* =========================
+         الحساب
+      ========================= */
 
       const totalSeconds =
         Math.floor(
@@ -696,13 +1142,21 @@
 
       const hours =
         Math.floor(
-          (totalSeconds % 86400) / 3600
+
+          (totalSeconds % 86400)
+
+          / 3600
+
         );
 
 
       const minutes =
         Math.floor(
-          (totalSeconds % 3600) / 60
+
+          (totalSeconds % 3600)
+
+          / 60
+
         );
 
 
@@ -710,33 +1164,59 @@
         totalSeconds % 60;
 
 
+
+      /* =========================
+         عرض الأرقام
+      ========================= */
+
       daysElement.textContent =
         String(days);
 
 
       hoursElement.textContent =
         String(hours)
-          .padStart(2, "0");
+        .padStart(
+          2,
+          "0"
+        );
 
 
       minutesElement.textContent =
         String(minutes)
-          .padStart(2, "0");
+        .padStart(
+          2,
+          "0"
+        );
 
 
       secondsElement.textContent =
         String(seconds)
-          .padStart(2, "0");
+        .padStart(
+          2,
+          "0"
+        );
+
 
     }
 
 
+
+    /* تشغيل التايمر مباشرة */
+
     updateCountdown();
 
+
+
+    /* تحديث كل ثانية */
+
     setInterval(
+
       updateCountdown,
+
       1000
+
     );
+
 
 
     /* =========================
@@ -744,15 +1224,21 @@
     ========================= */
 
     video.addEventListener(
+
       "error",
-      function () {
+
+      function() {
+
 
         console.log(
-          "تأكدي أن open.mp4 موجود بنفس المجلد"
+          "تأكدي من وجود open.mp4"
         );
 
+
       }
+
     );
+
 
 
     /* =========================
@@ -760,17 +1246,24 @@
     ========================= */
 
     music.addEventListener(
+
       "error",
-      function () {
+
+      function() {
+
 
         console.log(
-          "تأكدي أن music.mp3 موجود بنفس المجلد"
+          "تأكدي من وجود music.mp3"
         );
 
+
       }
+
     );
 
+
   </script>
+
 
 </body>
 
