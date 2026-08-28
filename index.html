@@ -1,945 +1,105 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
-
-<title>دعوة زفاف</title>
-
-<style>
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  margin:0;
-  padding:0;
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  padding:0;
-  background:#fffaf1;
-  font-family:Tahoma,Arial,sans-serif;
-}
-
-
-/* =========================================
-   الحاوية الرئيسية
-   كل الدعوة كأنها صورة/صفحة واحدة طويلة
-========================================= */
-
-#wedding{
-  width:100%;
-  max-width:600px;
-  margin:0 auto;
-  background:#fffaf1;
-  overflow:hidden;
-}
-
-
-/* =========================================
-   كل قسم
-========================================= */
-
-.section{
-  position:relative;
-  width:100%;
-  margin:0;
-  padding:0;
-  line-height:0;
-}
-
-
-/* =========================================
-   كل الصور
-   بدون أي فراغ بينها
-========================================= */
-
-.section img{
-  display:block;
-  width:100%;
-  height:auto;
-  margin:0;
-  padding:0;
-  border:0;
-}
-
-
-/* =========================================
-   صفحة البداية / الفيديو
-========================================= */
-
-#intro{
-  position:relative;
-  width:100%;
-  margin:0;
-  padding:0;
-  background:#fffaf1;
-  line-height:0;
-}
-
-
-#introVideo{
-  display:block;
-  width:100%;
-  height:auto;
-  margin:0;
-  padding:0;
-  object-fit:cover;
-}
-
-
-/* زر شفاف فوق المغلف */
-
-#openButton{
-  position:absolute;
-  inset:0;
-
-  width:100%;
-  height:100%;
-
-  padding:0;
-  margin:0;
-
-  border:0;
-  background:transparent;
-
-  cursor:pointer;
-
-  z-index:10;
-}
-
-
-/* اضغطي لفتح الدعوة */
-
-#openText{
-  position:absolute;
-
-  left:50%;
-  bottom:7%;
-
-  transform:translateX(-50%);
-
-  z-index:11;
-
-  line-height:1.2;
-
-  padding:10px 18px;
-
-  border-radius:30px;
-
-  border:1px solid rgba(168,122,53,.45);
-
-  background:rgba(255,250,241,.9);
-
-  color:#936a32;
-
-  font-size:14px;
-
-  white-space:nowrap;
-
-  pointer-events:none;
-
-  transition:opacity .3s ease;
-}
-
-
-/* =========================================
-   زر الموسيقى
-========================================= */
-
-#musicButton{
-  position:fixed;
-
-  left:16px;
-  bottom:18px;
-
-  z-index:9999;
-
-  width:48px;
-  height:48px;
-
-  border-radius:50%;
-
-  border:1px solid rgba(168,122,53,.45);
-
-  background:rgba(255,250,241,.95);
-
-  color:#a87a35;
-
-  cursor:pointer;
-
-  font-size:19px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-}
-
-
-#musicButton.playing{
-  background:#a87a35;
-  color:#fffaf1;
-}
-
-
-/* =========================================
-   التايمر
-========================================= */
-
-#timerSection{
-  position:relative;
-
-  width:100%;
-
-  margin:0;
-  padding:0;
-
-  line-height:0;
-}
-
-
-/* صورة التايمر */
-
-#timerImage{
-  display:block;
-
-  width:100%;
-  height:auto;
-
-  margin:0;
-  padding:0;
-}
-
-
-/* =========================================
-   أرقام التايمر
-========================================= */
-
-.timer-number{
-  position:absolute;
-
-  transform:translate(-50%,-50%);
-
-  z-index:20;
-
-  line-height:1;
-
-  color:#a87a35;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-weight:500;
-
-  font-size:clamp(20px,5.4vw,34px);
-
-  text-align:center;
-
-  direction:ltr;
-
-  min-width:45px;
-}
-
-
-/*
-   مهم:
-   هذه النسب محسوبة بالنسبة لصورة timer.png نفسها
-   وليس بالنسبة للشاشة.
-*/
-
-
-/* يوم */
-
-#days{
-  left:78.3%;
-  top:73.2%;
-}
-
-
-/* ساعة */
-
-#hours{
-  left:59.1%;
-  top:73.2%;
-}
-
-
-/* دقيقة */
-
-#minutes{
-  left:40%;
-  top:73.2%;
-}
-
-
-/* ثانية */
-
-#seconds{
-  left:20.8%;
-  top:73.2%;
-}
-
-
-/* =========================================
-   الموقع
-========================================= */
-
-#locationSection{
-  position:relative;
-
-  width:100%;
-
-  margin:0;
-  padding:0;
-
-  line-height:0;
-}
-
-
-#locationSection a{
-  display:block;
-  width:100%;
-  margin:0;
-  padding:0;
-}
-
-
-#locationSection img{
-  display:block;
-  width:100%;
-  height:auto;
-  margin:0;
-  padding:0;
-}
-
-
-/* زر الموقع فوق الصورة */
-
-#mapButton{
-  position:absolute;
-
-  left:50%;
-  bottom:8%;
-
-  transform:translateX(-50%);
-
-  width:65%;
-  max-width:280px;
-
-  padding:13px 20px;
-
-  line-height:1.3;
-
-  border-radius:40px;
-
-  background:#a87a35;
-
-  color:#fffaf1;
-
-  text-align:center;
-
-  text-decoration:none;
-
-  font-size:15px;
-
-  z-index:20;
-}
-
-
-/* =========================================
-   الكمبيوتر
-========================================= */
-
-@media(min-width:700px){
-
-  body{
-    background:#e9e4db;
-  }
-
-  #wedding{
-    box-shadow:0 0 30px rgba(0,0,0,.08);
-  }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =========================================
-     الموسيقى
-========================================= -->
-
-<audio
-  id="music"
-  preload="auto"
-  loop
->
-
-<source
-  src="music.mp3"
-  type="audio/mpeg"
->
-
-</audio>
-
-
-<button
-  id="musicButton"
-  type="button"
-  aria-label="تشغيل أو إيقاف الموسيقى"
->
-♫
-</button>
-
-
-
-<!-- =========================================
-     الكرت كامل
-========================================= -->
-
-<main id="wedding">
-
-
-<!-- =========================================
-     1 — فيديو فتح المغلف
-========================================= -->
-
-<section
-  class="section"
-  id="intro"
->
-
-<video
-  id="introVideo"
-  poster="cover.png"
-  preload="auto"
-  playsinline
-  webkit-playsinline
->
-
-<source
-  src="open.mp4"
-  type="video/mp4"
->
-
-</video>
-
-
-<button
-  id="openButton"
-  type="button"
-  aria-label="فتح الدعوة"
->
-</button>
-
-
-<div id="openText">
-اضغطي لفتح الدعوة
-</div>
-
-</section>
-
-
-
-<!-- =========================================
-     2 — Save The Date
-========================================= -->
-
-<section
-  class="section"
-  id="saveSection"
->
-
-<img
-  src="save.png"
-  alt="Save the Date"
->
-
-</section>
-
-
-
-<!-- =========================================
-     3 — المعلومات
-========================================= -->
-
-<section
-  class="section"
-  id="infoSection"
->
-
-<img
-  src="info.png"
-  alt="معلومات حفل الزفاف"
->
-
-</section>
-
-
-
-<!-- =========================================
-     4 — التايمر
-========================================= -->
-
-<section
-  class="section"
-  id="timerSection"
->
-
-
-<img
-  src="timer.png"
-  id="timerImage"
-  alt="العد التنازلي"
->
-
-
-<!-- الأرقام الحقيقية -->
-
-
-<div
-  class="timer-number"
-  id="days"
->
-0
-</div>
-
-
-<div
-  class="timer-number"
-  id="hours"
->
-00
-</div>
-
-
-<div
-  class="timer-number"
-  id="minutes"
->
-00
-</div>
-
-
-<div
-  class="timer-number"
-  id="seconds"
->
-00
-</div>
-
-
-</section>
-
-
-
-<!-- =========================================
-     5 — الموقع
-========================================= -->
-
-<section
-  class="section"
-  id="locationSection"
->
-
-
-<a
-  href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
-  target="_blank"
-  rel="noopener"
->
-
-
-<img
-  src="map.png"
-  alt="موقع حفل الزفاف"
->
-
-
-</a>
-
-
-<a
-  id="mapButton"
-  href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
-  target="_blank"
-  rel="noopener"
->
-
-فتح الموقع
-
-</a>
-
-
-</section>
-
-
-</main>
-
-
-
-<script>
-
-
-/* =========================================
-   العناصر
-========================================= */
-
-const video =
-document.getElementById("introVideo");
-
-
-const openButton =
-document.getElementById("openButton");
-
-
-const openText =
-document.getElementById("openText");
-
-
-const music =
-document.getElementById("music");
-
-
-const musicButton =
-document.getElementById("musicButton");
-
-
-let opened = false;
-
-
-
-/* =========================================
-   فتح الدعوة
-========================================= */
-
-openButton.addEventListener(
-"click",
-
-async function(){
-
-
-if(opened){
-  return;
-}
-
-
-opened = true;
-
-
-/* نخفي اضغطي لفتح الدعوة */
-
-openText.style.opacity = "0";
-
-
-openButton.style.pointerEvents = "none";
-
-
-
-/* =========================================
-   الموسيقى تبدأ فور الضغط
-========================================= */
-
-try{
-
-  music.volume = 0.6;
-
-  await music.play();
-
-  musicButton.textContent = "❚❚";
-
-  musicButton.classList.add("playing");
-
-}
-catch(error){
-
-  console.log("تعذر تشغيل الموسيقى");
-
-}
-
-
-
-/* =========================================
-   تشغيل الفيديو
-========================================= */
-
-try{
-
-  video.currentTime = 0;
-
-  await video.play();
-
-}
-catch(error){
-
-  goToSave();
-
-}
-
-
-}
-
-);
-
-
-
-/* =========================================
-   عند انتهاء فيديو فتح المغلف
-========================================= */
-
-video.addEventListener(
-"ended",
-
-function(){
-
-  goToSave();
-
-}
-
-);
-
-
-
-/* =========================================
-   الانتقال إلى Save the Date
-========================================= */
-
-function goToSave(){
-
-document
-.getElementById("saveSection")
-.scrollIntoView({
-
-  behavior:"smooth",
-
-  block:"start"
-
-});
-
-}
-
-
-
-/* =========================================
-   تشغيل / إيقاف الموسيقى
-========================================= */
-
-musicButton.addEventListener(
-"click",
-
-async function(){
-
-
-if(music.paused){
-
-
-try{
-
-  await music.play();
-
-  musicButton.textContent = "❚❚";
-
-  musicButton.classList.add("playing");
-
-}
-catch(error){
-
-  console.log("تعذر تشغيل الموسيقى");
-
-}
-
-
-}
-
-
-else{
-
-
-music.pause();
-
-musicButton.textContent = "♫";
-
-musicButton.classList.remove("playing");
-
-
-}
-
-
-}
-
-);
-
-
-
-/* =========================================
-   تاريخ الزفاف
-
-   27 / 7 / 2027
-   الساعة 7 مساءً
-========================================= */
-
-const weddingDate =
-new Date(
-
-2027,
-6,
-27,
-19,
-0,
-0
-
-);
-
-
-
-const daysElement =
-document.getElementById("days");
-
-
-const hoursElement =
-document.getElementById("hours");
-
-
-const minutesElement =
-document.getElementById("minutes");
-
-
-const secondsElement =
-document.getElementById("seconds");
-
-
-
-/* =========================================
-   تحديث العد التنازلي
-========================================= */
-
-function updateCountdown(){
-
-
-const now =
-new Date();
-
-
-let difference =
-weddingDate - now;
-
-
-
-if(difference <= 0){
-
-
-daysElement.textContent = "0";
-
-hoursElement.textContent = "00";
-
-minutesElement.textContent = "00";
-
-secondsElement.textContent = "00";
-
-
-return;
-
-}
-
-
-
-const totalSeconds =
-Math.floor(
-difference / 1000
-);
-
-
-
-const days =
-Math.floor(
-totalSeconds / 86400
-);
-
-
-
-const hours =
-Math.floor(
-
-(totalSeconds % 86400)
-
-/ 3600
-
-);
-
-
-
-const minutes =
-Math.floor(
-
-(totalSeconds % 3600)
-
-/ 60
-
-);
-
-
-
-const seconds =
-totalSeconds % 60;
-
-
-
-daysElement.textContent =
-String(days);
-
-
-hoursElement.textContent =
-String(hours)
-.padStart(2,"0");
-
-
-minutesElement.textContent =
-String(minutes)
-.padStart(2,"0");
-
-
-secondsElement.textContent =
-String(seconds)
-.padStart(2,"0");
-
-
-}
-
-
-
-/* تشغيل العداد */
-
-updateCountdown();
-
-
-setInterval(
-updateCountdown,
-1000
-);
-
-
-</script>
-
-
-</body>
-
-</html>
+Create an elegant 8-second vertical 9:16 promotional video for a luxury digital wedding invitation website.
+
+The video is designed for TikTok and Snapchat Stories.
+
+SCENE CONCEPT:
+A single elegant feminine hand is holding a smartphone in a refined and graceful way. The phone is clearly visible and centered in the frame. Add a second elegant feminine hand that enters only to tap the phone screen. Keep one fixed background and one stable composition throughout the entire video.
+
+VISUAL STYLE:
+- Luxury ivory-white wedding aesthetic
+- Champagne-gold accents
+- Soft embossed floral paper details
+- Romantic, refined, minimal and premium
+- Warm soft lighting
+- Smooth cinematic transitions
+- Clean elegant composition
+- No clutter
+- No camera shake
+- No aggressive movement
+- No flashy effects
+
+0.0–2.0 SECONDS:
+Show one elegant feminine hand holding the smartphone steadily.
+The smartphone screen displays the luxury digital wedding invitation homepage.
+On the screen, show a centered ivory-white envelope with a champagne-gold wax seal engraved clearly with:
+بسم الله الرحمن الرحيم
+
+Below the envelope, show the elegant button:
+اضغط هنا
+
+IMPORTANT:
+At this stage, the invitation card must NOT be visible.
+Nothing from inside the envelope should be visible.
+Do not show any part of the card before opening.
+The envelope must appear fully closed and conceal everything inside.
+
+2.0–3.0 SECONDS:
+A second elegant feminine hand enters naturally and gently taps the “اضغط هنا” button on the phone screen.
+
+3.0–5.5 SECONDS:
+Inside the smartphone screen, the envelope animation begins.
+First, the champagne-gold wax seal gently separates as one complete piece.
+Then the envelope flap opens slowly and gracefully upward.
+
+VERY IMPORTANT:
+Do not show the invitation card before the flap starts opening.
+Do not reveal anything from inside the envelope until the envelope has opened.
+Only after the envelope opens should the next content appear.
+
+The movement must feel:
+- slow
+- graceful
+- luxurious
+- realistic
+- cinematic
+
+5.5–7.0 SECONDS:
+After the envelope opens, create a smooth elegant transition inside the smartphone screen to the next page.
+
+Show a refined preview of the SAVE THE DATE page first.
+
+Then show a quick preview of the countdown page.
+
+IMPORTANT FOR THE COUNTDOWN:
+The countdown must be designed in elegant circular timer elements.
+Each time unit should appear inside a separate circle:
+- days in one circle
+- hours in one circle
+- minutes in one circle
+- seconds in one circle
+
+The circular countdown design should feel:
+- minimal
+- luxurious
+- clean
+- ivory-white and champagne-gold
+- consistent with the wedding branding
+
+Do not use rectangular countdown boxes.
+Use only elegant circular countdown shapes.
+
+7.0–8.0 SECONDS:
+End with the smartphone still in the same hand and the same fixed background.
+Show a refined final call-to-action on the phone screen or elegantly beside it:
+
+افتحوا الدعوة كاملة 🤍
+الرابط في البايو
+
+IMPORTANT:
+- Vertical 9:16
+- Exactly 8 seconds
+- Designed for TikTok and Snapchat
+- Keep all important elements inside the center safe area
+- The phone must remain clearly visible
+- The invitation must appear only inside the smartphone screen
+- Use one fixed background only
+- Keep the composition stable and clean
+- No part of the card should be visible before the envelope opens
+- Nothing should appear from inside the envelope until after opening
+- The envelope must stay fully closed before the tap and opening
+- The countdown must be circular, not rectangular
+- Preserve the ivory-white and champagne-gold visual identity
+- No distorted Arabic writing
+- No unnecessary effects
+- No excessive hand movement
+- Clean sophisticated luxury wedding atmosphere
