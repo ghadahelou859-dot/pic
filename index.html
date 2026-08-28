@@ -1,222 +1,232 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>دعوة زفاف محمد ولين</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>دعوة زفاف</title>
 
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     html,
     body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #f7f3ed;
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fffaf1;
+      font-family: Tahoma, Arial, sans-serif;
+      scroll-behavior: smooth;
     }
 
-    /* شاشة البداية */
-    #intro {
+    body {
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       زر الموسيقى
+    ========================= */
+    #musicButton {
       position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: #f7f3ed;
+      left: 16px;
+      bottom: 18px;
+      z-index: 9999;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(168, 122, 53, 0.45);
+      border-radius: 50%;
+      background: rgba(255, 250, 241, 0.96);
+      color: #a87a35;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
     }
 
-    #intro img {
+    #musicButton.playing {
+      background: #a87a35;
+      color: #fffaf1;
+    }
+
+    /* =========================
+       قسم البداية فقط
+    ========================= */
+    #intro {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      height: 100vh;
+      margin: 0 auto;
+      background: #fffaf1;
+      overflow: hidden;
+    }
+
+    #introVideo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
+      object-fit: contain;
+      background: #fffaf1;
     }
 
     #openButton {
       position: absolute;
-      left: 50%;
-      bottom: 18%;
-      transform: translateX(-50%);
-      z-index: 120;
-
-      border: none;
-      outline: none;
-
-      padding: 15px 34px;
-      border-radius: 45px;
-
-      background: rgba(255, 255, 255, 0.94);
-      color: #b58d4c;
-
-      font-size: 20px;
-      font-weight: 600;
-
-      cursor: pointer;
-
-      box-shadow: 0 5px 20px rgba(0,0,0,0.10);
-
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* شاشة الفيديو */
-    #videoScreen {
-      position: fixed;
       inset: 0;
-      z-index: 90;
-      display: none;
-      background: #f7f3ed;
-    }
-
-    #openingVideo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* الصفحات */
-    #pages {
-      position: fixed;
-      inset: 0;
-      display: none;
-
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-
-      -webkit-overflow-scrolling: touch;
-
-      background: #f7f3ed;
-    }
-
-    .page {
-      width: 100%;
-      height: 100svh;
-      position: relative;
-
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-
-      overflow: hidden;
-      background: #f7f3ed;
-    }
-
-    .page img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* العد التنازلي */
-    .countdown-page {
-      position: relative;
-    }
-
-    .countdown-live {
-      position: absolute;
-      top: 46%;
-      left: 50%;
-      transform: translateX(-50%);
-
-      width: 82%;
-
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 5%;
-
-      direction: ltr;
-      z-index: 20;
-
-      pointer-events: none;
-    }
-
-    .count-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .count-item span {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(30px, 8vw, 52px);
-      color: #b58d4c;
-      line-height: 1;
-    }
-
-    /* زر الموقع */
-    .map-button {
-      position: absolute;
-
-      left: 50%;
-      transform: translateX(-50%);
-
-      bottom: 17%;
-
-      width: 64%;
-      height: 8%;
-
-      z-index: 20;
-
+      border: 0;
       background: transparent;
+      cursor: pointer;
+      z-index: 10;
     }
 
-    /* زر الموسيقى */
-    #musicButton {
-      position: fixed;
+    #openText {
+      position: absolute;
+      left: 50%;
+      bottom: 7%;
+      transform: translateX(-50%);
+      z-index: 11;
+      padding: 10px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(168, 122, 53, 0.45);
+      background: rgba(255, 250, 241, 0.92);
+      color: #936a32;
+      font-size: 14px;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
 
-      right: 18px;
-      bottom: 24px;
-
-      z-index: 300;
-
-      width: 52px;
-      height: 52px;
-
-      border-radius: 50%;
-
-      border: 1px solid rgba(181, 141, 76, 0.45);
-
-      background: rgba(255,255,255,0.92);
-      color: #b58d4c;
-
-      font-size: 23px;
-
+    /* =========================
+       باقي الكرت مخفي بالبداية
+    ========================= */
+    #content {
       display: none;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fffaf1;
+      overflow: hidden;
+    }
 
-      cursor: pointer;
+    .section {
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
 
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    .section img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
 
-      touch-action: manipulation;
+    /* =========================
+       قسم التايمر
+    ========================= */
+    #timerSection {
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    #timerImage {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .timer-number {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 30;
+      color: #a87a35;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(18px, 5vw, 34px);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      direction: ltr;
+      min-width: 45px;
+    }
+
+    /* عدلي النسب إذا احتجنا */
+    #days {
+      left: 78.3%;
+      top: 73.2%;
+    }
+
+    #hours {
+      left: 59.1%;
+      top: 73.2%;
+    }
+
+    #minutes {
+      left: 40%;
+      top: 73.2%;
+    }
+
+    #seconds {
+      left: 20.8%;
+      top: 73.2%;
+    }
+
+    /* =========================
+       قسم الموقع
+    ========================= */
+    #locationSection {
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    #locationSection a {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #mapButton {
+      position: absolute;
+      left: 50%;
+      bottom: 7%;
+      transform: translateX(-50%);
+      z-index: 30;
+      width: 65%;
+      max-width: 280px;
+      padding: 13px 20px;
+      border-radius: 40px;
+      background: #a87a35;
+      color: #fffaf1;
+      text-align: center;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.3;
     }
 
     @media (min-width: 700px) {
       body {
-        background: #e8e2da;
+        background: #e9e4db;
       }
 
       #intro,
-      #videoScreen,
-      #pages {
-        width: 500px;
-        max-width: 100%;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-
-      #musicButton {
-        right: calc(50% - 230px);
+      #content {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
       }
     }
   </style>
@@ -224,216 +234,173 @@
 
 <body>
 
-  <!-- 1. المغلف -->
-  <section id="intro">
-    <img src="./envelope.jpeg" alt="المغلف" />
-
-    <button id="openButton" type="button">
-      اضغط هنا
-    </button>
-  </section>
-
-  <!-- 2. فيديو فتح المغلف -->
-  <section id="videoScreen">
-    <video
-      id="openingVideo"
-      playsinline
-      webkit-playsinline
-      preload="auto"
-      muted
-    >
-      <source src="./opening.mp4" type="video/mp4" />
-    </video>
-  </section>
-
   <!-- الموسيقى -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="./music.mp3" type="audio/mpeg" />
+  <audio id="music" preload="auto" loop>
+    <source src="music.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- زر الموسيقى -->
-  <button id="musicButton" type="button" aria-label="تشغيل أو إيقاف الموسيقى">
-    ♪
-  </button>
+  <button id="musicButton" type="button" aria-label="تشغيل أو إيقاف الموسيقى">♫</button>
 
-  <!-- الصفحات -->
-  <main id="pages">
+  <!-- صفحة المغلف فقط -->
+  <section id="intro">
+    <video id="introVideo" poster="cover.png" preload="auto" playsinline webkit-playsinline>
+      <source src="open.mp4" type="video/mp4" />
+    </video>
 
-    <!-- Save The Date -->
-    <section class="page">
-      <img src="./save-the-date.jpeg" alt="Save The Date" />
+    <button id="openButton" type="button" aria-label="فتح الدعوة"></button>
+
+    <div id="openText">اضغطي لفتح الدعوة</div>
+  </section>
+
+  <!-- باقي الصفحات مخفية حتى نهاية الفيديو -->
+  <main id="content">
+
+    <!-- Save the Date -->
+    <section class="section" id="saveSection">
+      <img src="save.png" alt="Save the Date" />
     </section>
 
-    <!-- العد التنازلي -->
-    <section class="page countdown-page">
-      <img src="./countdown.jpeg" alt="العد التنازلي" />
-
-      <div class="countdown-live">
-        <div class="count-item">
-          <span id="days">00</span>
-        </div>
-
-        <div class="count-item">
-          <span id="hours">00</span>
-        </div>
-
-        <div class="count-item">
-          <span id="minutes">00</span>
-        </div>
-
-        <div class="count-item">
-          <span id="seconds">00</span>
-        </div>
-      </div>
+    <!-- المعلومات -->
+    <section class="section" id="infoSection">
+      <img src="info.png" alt="معلومات الزفاف" />
     </section>
 
-    <!-- معلومات العرس -->
-    <section class="page">
-      <img src="./wedding-info.jpeg" alt="معلومات العرس" />
+    <!-- التايمر -->
+    <section class="section" id="timerSection">
+      <img src="timer.png" id="timerImage" alt="العد التنازلي" />
+
+      <div class="timer-number" id="days">0</div>
+      <div class="timer-number" id="hours">00</div>
+      <div class="timer-number" id="minutes">00</div>
+      <div class="timer-number" id="seconds">00</div>
     </section>
 
     <!-- الموقع -->
-    <section class="page">
-      <img src="./location.jpeg" alt="موقع العرس" />
+    <section class="section" id="locationSection">
+      <a href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8" target="_blank" rel="noopener">
+        <img src="map.png" alt="موقع حفل الزفاف" />
+      </a>
 
       <a
-        class="map-button"
-        href="https://maps.app.goo.gl/3LUZ8aMZ1nCqh6jG7?g_st=ic"
+        id="mapButton"
+        href="https://maps.app.goo.gl/3q5waWoJhZ8CDxVu8"
         target="_blank"
-        rel="noopener noreferrer"
-        aria-label="فتح الموقع على الخريطة"
-      ></a>
+        rel="noopener"
+      >
+        فتح الموقع
+      </a>
     </section>
 
   </main>
 
   <script>
-    const intro = document.getElementById("intro");
+    const video = document.getElementById("introVideo");
     const openButton = document.getElementById("openButton");
-    const videoScreen = document.getElementById("videoScreen");
-    const openingVideo = document.getElementById("openingVideo");
-    const pages = document.getElementById("pages");
+    const openText = document.getElementById("openText");
+    const intro = document.getElementById("intro");
+    const content = document.getElementById("content");
 
-    const bgMusic = document.getElementById("bgMusic");
+    const music = document.getElementById("music");
     const musicButton = document.getElementById("musicButton");
 
-    let musicPlaying = false;
+    let opened = false;
 
-    openButton.addEventListener("click", function () {
-      videoScreen.style.display = "block";
+    /* =========================
+       فتح الدعوة
+    ========================= */
+    openButton.addEventListener("click", async function () {
+      if (opened) return;
 
-      openingVideo.currentTime = 0;
-      openingVideo.muted = true;
+      opened = true;
+      openText.style.opacity = "0";
+      openButton.style.pointerEvents = "none";
 
-      bgMusic.currentTime = 0;
-      bgMusic.volume = 0.45;
+      /* تشغيل الموسيقى */
+      try {
+        music.volume = 0.6;
+        await music.play();
+        musicButton.textContent = "❚❚";
+        musicButton.classList.add("playing");
+      } catch (error) {
+        console.log("تعذر تشغيل الموسيقى");
+      }
 
-      openingVideo.play()
-        .then(function () {
-          intro.style.display = "none";
-
-          return bgMusic.play();
-        })
-        .then(function () {
-          musicPlaying = true;
-          musicButton.textContent = "♫";
-          musicButton.style.display = "flex";
-        })
-        .catch(function (error) {
-          console.log("Playback error:", error);
-
-          intro.style.display = "none";
-          musicButton.style.display = "flex";
-        });
-    });
-
-    openingVideo.addEventListener("ended", function () {
-      videoScreen.style.display = "none";
-      pages.style.display = "block";
-
-      pages.scrollTo({
-        top: 0,
-        behavior: "auto"
-      });
-    });
-
-    musicButton.addEventListener("click", function () {
-      if (musicPlaying) {
-        bgMusic.pause();
-        musicPlaying = false;
-        musicButton.textContent = "♪";
-      } else {
-        bgMusic.play()
-          .then(function () {
-            musicPlaying = true;
-            musicButton.textContent = "♫";
-          })
-          .catch(function (error) {
-            console.log("Music error:", error);
-          });
+      /* تشغيل فيديو المغلف */
+      try {
+        video.currentTime = 0;
+        await video.play();
+      } catch (error) {
+        showInvitation();
       }
     });
 
-    bgMusic.addEventListener("pause", function () {
-      musicPlaying = false;
-      musicButton.textContent = "♪";
+    /* بعد انتهاء الفيديو */
+    video.addEventListener("ended", function () {
+      showInvitation();
     });
 
-    bgMusic.addEventListener("play", function () {
-      musicPlaying = true;
-      musicButton.textContent = "♫";
+    function showInvitation() {
+      intro.style.display = "none";
+      content.style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "instant"
+      });
+    }
+
+    /* زر تشغيل / إيقاف الموسيقى */
+    musicButton.addEventListener("click", async function () {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicButton.textContent = "❚❚";
+          musicButton.classList.add("playing");
+        } catch (error) {
+          console.log("تعذر تشغيل الموسيقى");
+        }
+      } else {
+        music.pause();
+        musicButton.textContent = "♫";
+        musicButton.classList.remove("playing");
+      }
     });
 
-    /* العد التنازلي
-       26 / 10 / 2026
+    /* =========================
+       العد التنازلي
+       27 / 7 / 2027
        الساعة 7 مساءً
-    */
+    ========================= */
+    const weddingDate = new Date(2027, 6, 27, 19, 0, 0);
 
-    const weddingDate = new Date("2026-10-26T19:00:00+02:00");
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
 
     function updateCountdown() {
       const now = new Date();
+      let difference = weddingDate - now;
 
-      const distance =
-        weddingDate.getTime() - now.getTime();
-
-      if (distance <= 0) {
-        document.getElementById("days").textContent = "00";
-        document.getElementById("hours").textContent = "00";
-        document.getElementById("minutes").textContent = "00";
-        document.getElementById("seconds").textContent = "00";
+      if (difference <= 0) {
+        daysElement.textContent = "0";
+        hoursElement.textContent = "00";
+        minutesElement.textContent = "00";
+        secondsElement.textContent = "00";
         return;
       }
 
-      const days = Math.floor(
-        distance / (1000 * 60 * 60 * 24)
-      );
+      const totalSeconds = Math.floor(difference / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
 
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) /
-        (1000 * 60 * 60)
-      );
-
-      const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) /
-        (1000 * 60)
-      );
-
-      const seconds = Math.floor(
-        (distance % (1000 * 60)) / 1000
-      );
-
-      document.getElementById("days").textContent =
-        String(days).padStart(2, "0");
-
-      document.getElementById("hours").textContent =
-        String(hours).padStart(2, "0");
-
-      document.getElementById("minutes").textContent =
-        String(minutes).padStart(2, "0");
-
-      document.getElementById("seconds").textContent =
-        String(seconds).padStart(2, "0");
+      daysElement.textContent = String(days);
+      hoursElement.textContent = String(hours).padStart(2, "0");
+      minutesElement.textContent = String(minutes).padStart(2, "0");
+      secondsElement.textContent = String(seconds).padStart(2, "0");
     }
 
     updateCountdown();
